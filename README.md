@@ -1,3 +1,25 @@
+## (No longer necessary)
+
+GitHub's own [`actions/checkout`](https://github.com/actions/checkout) at version 2 will automatically set up your token, **however** unlike with `setup-git-token` you'll have to manually set the commit author and email, so you might want to continue using this action for that reason.
+
+### With setup-git-token
+
+```yml
+    - uses: actions/checkout@v2
+    - uses: fregante/setup-git-token@v1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+```
+
+### Without setup-git-token
+
+```yml
+    - uses: actions/checkout@v2
+    - run: git config user.name "GitHub Actions" && git config user.email "actions@users.noreply.github.com"
+```
+
+---
+
 # setup-git-token
 
 This action sets the `GITHUB_TOKEN` as credentials for git, allowing `git push` in successive steps. Additionally, the committer's `email` and `name` are also set.
