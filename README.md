@@ -1,21 +1,31 @@
-## (No longer necessary)
+## ⚠️ Deprecated
 
-GitHub's own [`actions/checkout`](https://github.com/actions/checkout) at version 2 will automatically set up your token, **however** unlike with `setup-git-token` you'll have to manually set the commit author and email, so you might want to continue using this action for that reason.
+Starting with the v2 of [actions/checkout](https://github.com/actions/checkout), the token will be automatically set **however** you'll still have to manually set the commit author and email. It's best you use the new [fregante/setup-git-user](https://github.com/fregante/setup-git-user) action instead:
 
-### With setup-git-token
+### Old version: `actions/checkout@v1` + `setup-git-token`
 
 ```yml
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v1
     - uses: fregante/setup-git-token@v1
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-### Without setup-git-token
+### New version: `actions/checkout@v2` + [`setup-git-user`](https://github.com/fregante/setup-git-user)
 
 ```yml
     - uses: actions/checkout@v2
-    - run: git config user.name "GitHub Actions" && git config user.email "actions@users.noreply.github.com"
+    - uses: fregante/setup-git-user@v1
+```
+
+### Verbose action-less version
+
+You don't really need an action anymore, but it's slightly more verbose:
+
+```yml
+    - uses: actions/checkout@v2
+    - run: git config user.name "GitHub Actions"
+    - run: git config user.email "actions@users.noreply.github.com"
 ```
 
 ---
